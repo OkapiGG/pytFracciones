@@ -1,0 +1,13 @@
+# Dependencias de Node
+node_modules/
+
+# Archivos de Expo
+.expo/
+dist/
+build/
+
+# SQLite (para que no subas tu base local)
+*.db
+
+# Configuración sensible
+.env
