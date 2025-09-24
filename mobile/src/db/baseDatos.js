@@ -13,7 +13,7 @@ function initDb(tx){
     //-------------------usuario----------------
     tx.executeSql(
         `CREATE TABLE IF NOT EXISTS usuario( 
-            idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
+            idUsuario INTEGER PRIMARY KEY,
             nombre TEXT NOT NULL UNIQUE,
             contrasena TEXT NOT NULL,
             fechaCreacion TEXT DEFAULT (datetime('now')),
@@ -111,7 +111,21 @@ function initDb(tx){
         `CREATE TABLE IF NOT EXISTS ajustes(
             idAjustes INTEGER PRIMARY KEY AUTOINCREMENT,
             idUsuario INTEGER NOT NULL REFERENCES usuario(idUsuario) ON DELETE CASCADE,
-            volumen INTEGER DEFAULT 100 CHECK (volumen BETWEEN 0 AND 100)
+            volumen INTEGER DEFAULT 100 CHECK (volumen BETWEEN 0 AND 100),
+            UNIQUE(idUsuario) -- asegura 1:1
         );`
-    )
+    );
+
+    //----------------Indices para sql-------------
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_prog_user     ON progresoLeccion(idUsuario);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_prog_leccion  ON progresoLeccion(idLeccion);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_ejer_leccion  ON ejercicio(idLeccion);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_int_user      ON intento(idUsuario);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_int_ejercicio ON intento(idEjercicio);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_pista_intento ON pistaIntento(idIntento);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_exp_intento   ON explicacionVista(idIntento);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_ins_user      ON insigniaOtorgada(idUsuario);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_ins_def       ON insigniaOtorgada(idInsigniaDet);`);
+    tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_ajustes_user  ON ajustes(idUsuario);`);
+    
 };
