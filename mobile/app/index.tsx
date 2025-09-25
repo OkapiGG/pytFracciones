@@ -56,7 +56,6 @@ const ScreenContainer = styled.View`
 `;
 
 const Card = styled.View`
-    //width: ${width * 0.85}px; /* 85% del ancho de la pantalla */
     background-color: white;
     border-radius: 20px;
     padding: 30px;
