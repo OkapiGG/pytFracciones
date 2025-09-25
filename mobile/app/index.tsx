@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 export default function LoginScreen() {
     const [name, setName] = useState('');
 
-    const handleNext = () => {
+    const valNombre = () => {
         if (!name.trim()) {
             Alert.alert('Error', 'Por favor, introduce tu nombre.');
             return;
@@ -30,7 +30,7 @@ export default function LoginScreen() {
                 autoCapitalize="words"
             />
 
-            <NextButton onPress={handleNext}>
+            <NextButton onPress={valNombre}>
                 <ButtonText>¡Siguiente! 🚀</ButtonText>
             </NextButton>
         </Card>
