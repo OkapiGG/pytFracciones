@@ -43,7 +43,7 @@ const ScreenContainer = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: #FDEFEF;
+    background-color: #c47afe;
 `;
 
 const Card = styled.View`
@@ -101,7 +101,8 @@ const StyledInput = styled.TextInput`
     margin-bottom: 25px;
     border: 1px solid #ee69ff;
     box-shadow: 5px 4px 8px rgba(174, 69, 255, 0.30);
-    padding-horizontal: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
 `;
 
 const NextButton = styled.TouchableOpacity`
