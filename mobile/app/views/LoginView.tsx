@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
@@ -30,7 +31,7 @@ export default function LoginScreen() {
                 autoCapitalize="words"
             />
 
-            <NextButton onPress={valNombre}>
+          <NextButton onPress={()=>router.push("CustomizeProfile")}>
                 <ButtonText>¡Siguiente! 🚀</ButtonText>
             </NextButton>
         </Card>
