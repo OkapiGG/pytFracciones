@@ -1,13 +1,13 @@
-import type { SQLResultSet } from 'expo-sqlite';
-import { executeSql } from '../db/baseDatos';
+// import type { SQLResultSet } from 'expo-sqlite';
+// import { executeSql } from '../db/baseDatos';
 
-export const UserRepository = {
+// export const UserRepository = {
 
-    async addUser(nombre: string, contrasena: string): Promise<SQLResultSet> {
-        if (!nombre || !contrasena) {
-            throw new Error("El nombre y la contraseña son requeridos.");
-        }
-        const sql = 'INSERT INTO usuario (nombre, contrasena) VALUES (?, ?);';
-        return executeSql(sql, [nombre, contrasena]);
-    }
-};
+//     async addUser(nombre: string, contrasena: string): Promise<SQLResultSet> {
+//         if (!nombre || !contrasena) {
+//             throw new Error("El nombre y la contraseña son requeridos.");
+//         }
+//         const sql = 'INSERT INTO usuario (nombre, contrasena) VALUES (?, ?);';
+//         return executeSql(sql, [nombre, contrasena]);
+//     }
+// };

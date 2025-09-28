@@ -31,7 +31,7 @@ export default function LoginScreen() {
                 autoCapitalize="words"
             />
 
-          <NextButton onPress={()=>router.push("CustomizeProfile")}>
+            <NextButton onPress={()=>router.push("/views/CustomizeProfile")}>
                 <ButtonText>¡Siguiente! 🚀</ButtonText>
             </NextButton>
         </Card>

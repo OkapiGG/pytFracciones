@@ -23,7 +23,7 @@ export default function LoginScreen() {
             <Subtitle>Juntos aprenderán a dividir dulces y mucho más</Subtitle>
                     
                 <IconContainer>
-                     {/* Icono de galleto*/}
+                    {/* Icono de galleto*/}
                     <Title>Galleto</Title>
                     <Subtitle>Tu dulce compañero de fracciones</Subtitle>
                 </IconContainer>
