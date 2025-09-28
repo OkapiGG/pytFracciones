@@ -129,3 +129,20 @@ function initDb(tx){
     tx.executeSql(`CREATE INDEX IF NOT EXISTS idx_ajustes_user  ON ajustes(idUsuario);`);
     
 };
+
+
+/**
+ * Ejecuta una sentencia SQL.
+ * @param {string} sql - La consulta SQL.
+ *- El comando SQL a ejecutar
+ * @param {Array<any>} params - Los parámetros para la consulta.
+- Los parámetros que se usarán en la consulta
+ * @returns {Promise<SQLite.SQLResultSet>} El resultado de la consulta.
+ */
+export const executeSql = (sql, params = []) => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(sql, params, (_, result) => resolve(result), (_, error) => reject(error));
+        });
+    });
+};
