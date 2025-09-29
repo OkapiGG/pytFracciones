@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
@@ -31,7 +32,10 @@ export default function LoginScreen() {
           <CompanionSubtitle>Tu dulce compañero de fracciones</CompanionSubtitle>
         </CompanionCard>                
         <Title>Escoge tu compañero favorito</Title>
-      </Card>            
+        <NextButton onPress={()=>router.push("/views/lessons")}>
+                      <ButtonText>¡Siguiente! 🚀</ButtonText>
+                  </NextButton> 
+      </Card>                  
     </ScreenContainer>
   );
 }
