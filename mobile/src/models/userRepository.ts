@@ -1,33 +1,25 @@
-// // src/models/userRepository.js
-// import { executeSql } from '../db/baseDatos';
+// import executeSql from '../db/baseDatos';
 
 // export const UserRepository = {
-//   async addUser(nombre, contrasena) {
-//     if (!nombre || !contrasena) {
-//       throw new Error('El nombre y la contraseña son requeridos.');
+    
+//     async createUser(nombre: string, contrasena: string): Promise<any> {
+//         if (!nombre || !contrasena) {
+//             throw new Error("El nombre y la contraseña son requeridos.");
+//         }
+        
+//         const sql: string = 'INSERT INTO usuario (nombre, contrasena) VALUES (?, ?);';
+//         try {
+//             const result: any = await executeSql(sql, [nombre, contrasena]);
+//             return result;
+//         } catch (error: unknown) {
+//             console.error("Error al agregar usuario:", error);
+//             throw error;
+//         }
+//     },
+
+//     async readUser(nombre: string): Promise<any> {
+//         const sql: string = 'SELECT * FROM usuario WHERE nombre = ?;';
+//         const result: any = await executeSql(sql, [nombre]);
+//         return result.rows._array[0] as any;
 //     }
-//     return executeSql(
-//       'INSERT INTO usuario (nombre, contrasena) VALUES (?, ?);',
-//       [nombre, contrasena]
-//     );
-//   },
-
-//   async findByNombre(nombre) {
-//     const rs = await executeSql(
-//       'SELECT * FROM usuario WHERE nombre = ? LIMIT 1;',
-//       [nombre]
-//     );
-//     return rs.rows.length ? rs.rows.item(0) : null;
-//   },
-
-//   async all() {
-//     const rs = await executeSql('SELECT * FROM usuario ORDER BY idUsuario DESC;');
-//     const out = [];
-//     for (let i = 0; i < rs.rows.length; i++) out.push(rs.rows.item(i));
-//     return out;
-//   },
-
-//   async removeById(idUsuario) {
-//     return executeSql('DELETE FROM usuario WHERE idUsuario = ?;', [idUsuario]);
-//   },
 // };

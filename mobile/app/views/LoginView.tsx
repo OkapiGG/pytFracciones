@@ -32,7 +32,7 @@ export default function LoginScreen() {
             />
 
             <NextButton onPress={()=>router.push("/views/CustomizeProfile")}>
-                <ButtonText>¡Siguiente! 🚀</ButtonText>
+                <ButtonText onPress={valNombre}>¡Siguiente! 🚀</ButtonText>
             </NextButton>
         </Card>
     </ScreenContainer>
@@ -121,8 +121,3 @@ const ButtonText = styled.Text`
     font-size: 18px;
     font-weight: bold;
 `;
-
-
-
-
-
