@@ -3,119 +3,145 @@ import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 
 export default function LoginScreen() {
-    const [name, setName] = useState('');
+  const [selectedCompanion, setSelectedCompanion] = useState<string | null>(null);
 
-    const valNombre = () => {
-        if (!name.trim()) {
-            Alert.alert('Escogiste un perfil', 'Por favor, selecciona un perfil para continuar.');
-            return;
-        }
-        Alert.alert('¡Hola!', `Bienvenido, ${name.trim()}!`);
-    };
-    return (
+  const handleNext = () => {
+    if (!selectedCompanion) {
+      Alert.alert('Escoge un compañero', 'Por favor, selecciona un compañero para continuar.');
+      return;
+    }
+    Alert.alert('¡Listo!', `Has elegido: ${selectedCompanion} ✨`);
+  };
+
+  return (
     <ScreenContainer>
-        <Card>
-            <IconContainer>
-            {/* <IconImage source={require('./assets/book-icon.png')} /> */}
-            </IconContainer>
-            <Title>¡Hola!</Title>
-            <Subtitle>Elige a tu compañero de aventuras en el mundo de las fracciones</Subtitle>
-            <Subtitle>Juntos aprenderán a dividir dulces y mucho más</Subtitle>
-                    
-                <IconContainer>
-                    {/* Icono de galleto*/}
-                    <Title>Galleto</Title>
-                    <Subtitle>Tu dulce compañero de fracciones</Subtitle>
-                </IconContainer>
-            
+      <Card>
+        <Title>¡⭐Hola⭐!</Title>
+        <Subtitle>Elige a tu compañero de aventuras en el mundo de las fracciones</Subtitle>
+        <QuestionText>Juntos aprenderán a dividir dulces y mucho más</QuestionText>
 
-            <NextButton onPress={valNombre}>
-                <ButtonText>¡Siguiente! 🚀</ButtonText>
-            </NextButton>
-        </Card>
+        {/* Tarjeta tipo “sticker” */}
+        <CompanionCard
+          active={selectedCompanion === 'Galleto'}
+          onPress={() => setSelectedCompanion('Galleto')}
+          activeOpacity={0.9}
+        >
+          <Emoji>🍪</Emoji>
+          <CompanionTitle>Galleto</CompanionTitle>
+          <CompanionSubtitle>Tu dulce compañero de fracciones</CompanionSubtitle>
+        </CompanionCard>                
+        <Title>Escoge tu compañero favorito</Title>
+      </Card>            
     </ScreenContainer>
-    );
+  );
 }
 
-// ---Estilos---
+/* ---------- Estilos ---------- */
 const ScreenContainer = styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    background-color: #c47afe;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #c47afe;
 `;
 
 const Card = styled.View`
-    background-color: white;
-    border-radius: 20px;
-    padding: 30px;
-    align-items: center;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  align-items: center;
+  width: 92%;
+  max-width: 420px;
+  /* Sombra iOS */
+  shadow-color: #000;
+  shadow-offset: 0px 10px;
+  shadow-opacity: 0.12;
+  shadow-radius: 18px;
+  /* Sombra Android */
+  elevation: 6;
 `;
-
-const IconContainer = styled.View`
-    background-color: #A064FF;
-    width: 80px;
-    height: 80px;
-    border-radius: 40px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-
-`;
-
-// const IconImage = styled.Image`
-//     width: 50px;
-//     height: 50px;
-// `;
 
 const Title = styled.Text`
-    font-size: 30px;
-    font-weight: bold;
-    color: #5d08e6;
-    margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #364153;
+  text-align: center;
+  margin-bottom: 8px;
 `;
 
 const Subtitle = styled.Text`
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 30px;
+  font-size: 15px;
+  color: #6a6a6a;
+  text-align: center;
+  margin-bottom: 10px;
 `;
 
 const QuestionText = styled.Text`
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 15px;
-    text-align: center;
+  font-size: 14px;
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 18px;
 `;
 
-const StyledInput = styled.TextInput`
-    width: 100%;
-    height: 50px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 25px;
-    border: 1px solid #ee69ff;
-    box-shadow: 5px 4px 8px rgba(174, 69, 255, 0.30);
-    padding-left: 8px;
-    padding-right: 8px;
+/* ---- Tarjeta del compañero (como tu imagen) ---- */
+const CompanionCard = styled.TouchableOpacity<{ active?: boolean }>`
+  width: 220px;
+  padding: 18px;
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+
+  /* Fondo suave tipo tarjeta */
+  background: ${(p) => (p.active ? '#f3e5ff' : '#f9f1ff')};
+
+  /* Borde sutil y resaltado cuando está activa */
+  border: 2px solid ${(p) => (p.active ? '#7b2cbf' : '#f0d9ff')};
+
+  /* Sombras */
+  shadow-color: #000;
+  shadow-offset: 0px 4px;
+  shadow-opacity: 0.12;
+  shadow-radius: 10px;
+  elevation: 3;
+
+  margin-bottom: 22px;
 `;
 
+const Emoji = styled.Text`
+  font-size: 44px;
+  margin-bottom: 10px;
+`;
+
+const CompanionTitle = styled.Text`
+  font-size: 18px;
+  font-weight: 800;
+  color: #7b2cbf;
+  margin-bottom: 4px;
+`;
+
+const CompanionSubtitle = styled.Text`
+  font-size: 13px;
+  color: #6a6a6a;
+  text-align: center;
+`;
+
+/* Botón siguiente */
 const NextButton = styled.TouchableOpacity`
-    width: 100%;
-    padding: 15px;
-    background-color: #FF69B4;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 5px 15px rgba(255, 105, 180, 0.4);
+  width: 100%;
+  padding: 14px;
+  background-color: #c86fdf;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+
+  shadow-color: #000;
+  shadow-offset: 0px 5px;
+  shadow-opacity: 0.18;
+  shadow-radius: 12px;
+  elevation: 4;
 `;
 
 const ButtonText = styled.Text`
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
 `;
