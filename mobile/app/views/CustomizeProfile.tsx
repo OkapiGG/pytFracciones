@@ -1,10 +1,11 @@
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Text } from 'react-native';
 import styled from 'styled-components/native';
 
 export default function LoginScreen() {
   const [selectedCompanion, setSelectedCompanion] = useState<string | null>(null);
+  const { name } = useLocalSearchParams<{ name: string }>();
 
   const handleNext = () => {
     if (!selectedCompanion) {
@@ -14,10 +15,16 @@ export default function LoginScreen() {
     Alert.alert('¡Listo!', `Has elegido: ${selectedCompanion} ✨`);
   };
 
+  const setUser = () => {
+    //UserRepository.createUser(name,)
+  };
+
   return (
     <ScreenContainer>
       <Card>
-        <Title>¡⭐Hola⭐!</Title>
+        <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+          Hola {name} 👋
+        </Text>
         <Subtitle>Elige a tu compañero de aventuras en el mundo de las fracciones</Subtitle>
         <QuestionText>Juntos aprenderán a dividir dulces y mucho más</QuestionText>
 
@@ -32,9 +39,12 @@ export default function LoginScreen() {
           <CompanionSubtitle>Tu dulce compañero de fracciones</CompanionSubtitle>
         </CompanionCard>                
         <Title>Escoge tu compañero favorito</Title>
+
+
+        
         <NextButton onPress={()=>router.push("/views/lessons")}>
-                      <ButtonText>¡Siguiente! 🚀</ButtonText>
-                  </NextButton> 
+          <ButtonText>¡Siguiente! 🚀</ButtonText>
+        </NextButton> 
       </Card>                  
     </ScreenContainer>
   );

@@ -9,10 +9,12 @@ export default function LoginScreen() {
     const valNombre = () => {
         if (!name.trim()) {
             Alert.alert('Error', 'Por favor, introduce tu nombre.');
-            return;
+            return false;
         }
-        Alert.alert('¡Hola!', `Bienvenido, ${name.trim()}!`);
+        return true;
     };
+
+
     return (
     <ScreenContainer>
         <Card>
@@ -31,8 +33,15 @@ export default function LoginScreen() {
                 autoCapitalize="words"
             />
 
-            <NextButton onPress={()=>router.push("/views/CustomizeProfile")}>
-                <ButtonText onPress={valNombre}>¡Siguiente! 🚀</ButtonText>
+            <NextButton onPress={() => {
+                if(valNombre()){
+                    router.push({
+                        pathname: "/views/CustomizeProfile",
+                        params: {name}
+                    })
+                }
+            }}>
+                <ButtonText>¡Siguiente! 🚀</ButtonText>
             </NextButton>
         </Card>
     </ScreenContainer>
