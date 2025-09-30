@@ -1,10 +1,11 @@
+import { UserRepository } from "@/src/models/userRepository";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from 'react';
 import { Alert, Text } from 'react-native';
 import styled from 'styled-components/native';
 
 export default function LoginScreen() {
-  const [selectedCompanion, setSelectedCompanion] = useState<string | null>(null);
+  const [selectedCompanion, setSelectedCompanion] = useState<string>("");
   const { name } = useLocalSearchParams<{ name: string }>();
 
   const handleNext = () => {
@@ -16,8 +17,11 @@ export default function LoginScreen() {
   };
 
   const setUser = () => {
-    //UserRepository.createUser(name,)
+    UserRepository.createUser(name, selectedCompanion)
   };
+
+  console.log(selectedCompanion);
+  console.log(name);
 
   return (
     <ScreenContainer>
@@ -39,10 +43,14 @@ export default function LoginScreen() {
           <CompanionSubtitle>Tu dulce compañero de fracciones</CompanionSubtitle>
         </CompanionCard>                
         <Title>Escoge tu compañero favorito</Title>
-
-
         
-        <NextButton onPress={()=>router.push("/views/lessons")}>
+        <NextButton onPress={() => {
+            handleNext();
+            //setUser();
+            router.push({
+              pathname: "/views/lessons"
+            });
+          }}>
           <ButtonText>¡Siguiente! 🚀</ButtonText>
         </NextButton> 
       </Card>                  

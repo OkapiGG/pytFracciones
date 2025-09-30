@@ -14,6 +14,8 @@ export default function LoginScreen() {
         return true;
     };
 
+    console.log(name);
+
 
     return (
     <ScreenContainer>
