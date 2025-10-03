@@ -42,7 +42,10 @@ export default function CustomizeProfileScreen() {
       const usuario = await UserRepository.getByName(nombre);
       console.log("Insertado:", usuario);
       Alert.alert("¡Listo!", `Has elegido: ${selected} ✨`);
-      router.push({ pathname: "/views/lessons" });
+      router.push({
+          pathname: "/views/lessons",
+          params: {name, selected}
+        })
     } catch (e: any) {
       if (typeof e?.message === "string" && e.message.includes("SQLITE_CONSTRAINT")) {
         Alert.alert("Nombre en uso", "Este nombre ya existe. Intenta con otro.");
