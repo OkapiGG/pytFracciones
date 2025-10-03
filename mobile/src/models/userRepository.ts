@@ -12,8 +12,10 @@ export const UserRepository = {
     async createUser(nombre: string, companero: string): Promise<void> {
         const db = await getDb();
         await db.runAsync(
-            `INSERT INTO usuario (nombre, companero) VALUES (?, ?)`,
-            [nombre, companero]
+            `INSERT INTO usuario (nombre, companero)
+            VALUES (?, ?)
+            ON CONFLICT(nombre) DO UPDATE SET companero = excluded.companero`,
+            [nombre.trim(), companero.trim()]
         );
     },
 

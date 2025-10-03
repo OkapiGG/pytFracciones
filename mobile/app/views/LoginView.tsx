@@ -16,7 +16,6 @@ export default function LoginScreen() {
 
     console.log(name);
 
-
     return (
     <ScreenContainer>
         <Card>
