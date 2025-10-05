@@ -1,3 +1,9 @@
+import {
+  COMPANIONS,
+  Companion,
+  CompanionKey,
+  getCompanionByKey,
+} from "@/src/models/companions";
 import { UserRepository } from "@/src/models/userRepository";
 import { LinearGradient } from "expo-linear-gradient";
 import { router, useLocalSearchParams } from "expo-router";
@@ -6,27 +12,16 @@ import { Alert, FlatList } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-type Comp = { key: string; emoji: string; label: string; sub: string };
-
-const COMPANIONS: Comp[] = [
-  { key: "Galleto", emoji: "🍪", label: "Galleto", sub: "Tu dulce compañero de fracciones" },
-  { key: "Cuppy",   emoji: "🧁", label: "Cuppy",   sub: "Siempre listo para sumar" },
-  { key: "Dulcito", emoji: "🍭", label: "Dulcito", sub: "Le encantan las partes iguales" },
-  { key: "Tortita", emoji: "🎂", label: "Tortita", sub: "Divide y comparte" },
-  { key: "Rosquilla", emoji: "🍩", label: "Rosquilla", sub: "Círculos y porciones" },
-  { key: "Pastel",  emoji: "🥧", label: "Pastel",  sub: "Rebanadas perfectas" },
-  { key: "Helado",  emoji: "🍦", label: "Helado",  sub: "Dulce y refrescante" },
-  { key: "Choco",   emoji: "🍫", label: "Choco",   sub: "Tabletas y barritas" },
-];
-
 export default function CustomizeProfileScreen() {
   const { name } = useLocalSearchParams<{ name: string }>();
   const nombre = useMemo(() => (typeof name === "string" ? name : "").trim(), [name]);
-  const [selected, setSelected] = useState<string>("Galleto");
+  const [selected, setSelected] = useState<CompanionKey>("Galleto");
 
   const insets = useSafeAreaInsets();
   const topPad = (insets.top || 0) + 8;
   const bottomPad = (insets.bottom || 0) + 1;
+
+  const featured = getCompanionByKey(selected) ?? COMPANIONS[0];
 
   const onStart = async () => {
     if (!nombre) {
@@ -44,7 +39,7 @@ export default function CustomizeProfileScreen() {
       Alert.alert("¡Listo!", `Has elegido: ${selected} ✨`);
       router.push({
           pathname: "/views/lessons",
-          params: {name, selected}
+          params: {name: nombre, selected, emoji: featured.emoji}
         })
     } catch (e: any) {
       if (typeof e?.message === "string" && e.message.includes("SQLITE_CONSTRAINT")) {
@@ -56,7 +51,7 @@ export default function CustomizeProfileScreen() {
     }
   };
 
-  const renderItem = ({ item }: { item: Comp }) => {
+  const renderItem = ({ item }: { item: Companion }) => {
     const active = selected === item.key;
     return (
       <CardWrap onPress={() => setSelected(item.key)} activeOpacity={0.9}>
@@ -77,7 +72,6 @@ export default function CustomizeProfileScreen() {
     );
   };
 
-  const featured = COMPANIONS.find((c) => c.key === selected) ?? COMPANIONS[0];
 
   return (
     <BG>
@@ -132,7 +126,7 @@ export default function CustomizeProfileScreen() {
               contentContainerStyle={{ gap: 12, paddingBottom: 16 }}
               scrollEnabled={false}
             />
-
+    
             <Footer>
               <GhostButton onPress={() => router.back()}>
                 <GhostText>← Volver</GhostText>
@@ -235,7 +229,6 @@ const InnerCard = styled.View<{ active?: boolean }>`
   align-items: center;
   justify-content: center;
   gap: 6px;
-
   shadow-color: #000;
   shadow-offset: 0px 3px;
   shadow-opacity: 0.12;
