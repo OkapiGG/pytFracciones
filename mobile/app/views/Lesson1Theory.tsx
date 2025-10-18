@@ -81,7 +81,7 @@ export default function Index() {
 
                         <View style={{ height: 20 }} />
 
-                        <GradientButtonT1 title="¡Practicar con Ejercicios! 🎯" onPress={() => router.back}
+                        <GradientButtonT1 title="¡Practicar con Ejercicios! 🎯" onPress={() => router.push("/views/Lesson1")}
                         />
                     </Container>
                 </ScreenContent>
