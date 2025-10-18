@@ -1,11 +1,10 @@
 import { LessonCard } from "@/src/components/LessonCard";
 import { getEmoji } from "@/src/models/companions";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useMemo } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
-
 
 export default function Index() {
     const { name, selected, emoji } = useLocalSearchParams<{
@@ -70,7 +69,12 @@ export default function Index() {
                             sub={l.sub}
                             progress={l.progress}
                             icon={l.icon}
-                            onPress={() => console.log("Ir a lección", l.id)}
+                            onPress={() => 
+                                router.push({
+                                pathname: '/views/Lesson1Theory',
+                                params: { title: l.title },
+                                })
+                            }   
                         />
                     ))}
                 </ScreenContent>
