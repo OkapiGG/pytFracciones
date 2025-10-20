@@ -3,8 +3,8 @@ import { Platform } from "react-native";
 import styled from "styled-components/native";
 
 type TargetCardProps = {
-    title: string;
-    subtitle: string;
+    title?: string;
+    subtitle?: string;
     numerator: number;
     denominator: number;
     colorAccent?: string;
@@ -41,7 +41,6 @@ export const TargetCard: React.FC<TargetCardProps> = ({
     );
 };
 
-// -------- estilos (copiados de tu Index) -------- //
 
 const TargetContainer = styled.View`
     background: #ffeaf2;

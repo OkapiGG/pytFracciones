@@ -8,7 +8,6 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-
 export default function Index() {
     const { title } = useLocalSearchParams<{ title: string }>();
     const titulo = useMemo(() => (typeof title === "string" ? title : "").trim(), [title]);
@@ -29,7 +28,6 @@ export default function Index() {
                     <ButtonBack onPress={() => router.back()}>
                         <ButtonBackText>Volver</ButtonBackText>
                     </ButtonBack>
-
 
                     <View style={styles.badge}>
                         <Text style={styles.badgeText} numberOfLines={1}>
